@@ -1,0 +1,51 @@
+Name: freetype
+Summary: A free and portable font rendering engine
+Version: 2.4.2
+Release: 1
+Group: System/Libraries
+License: FTL or GPLv2+
+URL: http://www.freetype.org
+Sources:
+    - http://download.savannah.gnu.org/releases-noredirect/freetype/freetype-%{version}.tar.bz2
+    - http://download.savannah.gnu.org/releases-noredirect/freetype/freetype-doc-%{version}.tar.bz2
+Patches:
+# Patented subpixel rendering disabled by default.
+# Pass '--with subpixel_rendering' on rpmbuild command-line to enable.
+#%{!?_with_subpixel_rendering: %{!?_without_subpixel_rendering: %define _without_subpixel_rendering --without-subpixel_rendering}}
+#%if %{?_with_subpixel_rendering:1}%{!?_with_subpixel_rendering:0}
+#    - freetype-2.3.0-enable-spr.patch
+#%endif
+    - freetype-2.2.1-enable-valid.patch
+    - freetype-multilib.patch
+    - freetype-CVE-2010-3855.patch
+    - freetype-CVE-2010-3814.patch
+Description: |
+    The FreeType engine is a free and portable font rendering
+    engine, developed to provide advanced font support for a variety of
+    platforms and environments. FreeType is a library which can open and
+    manages font files as well as efficiently load, hint and render
+    individual glyphs. FreeType is not a font server or a complete
+    text-rendering library.
+
+Provides:
+    - "%{name}-bytecode"
+#%if %{?_with_subpixel_rendering:1}%{!?_with_subpixel_rendering:0}
+#    - "%{name}-subpixel"
+#%endif
+#Can't use yaml configure and builder because of some scripts between configure and make
+Configure: none
+Builder: none
+SubPackages:
+    - Name: devel
+      Summary: FreeType development libraries and header files
+      Group: Development/Libraries
+      Description: |
+          The freetype-devel package includes the static libraries and header files
+          for the FreeType font rendering engine.
+          
+          Install freetype-devel if you want to develop programs which will use
+          FreeType.
+      Requires:
+          - zlib-devel
+          - pkgconfig
+

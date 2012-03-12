@@ -1,3 +1,12 @@
+* Mon Mar 12 2012 Marko Saukko <marko.saukko@gmail.com> - 2.4.9
+- Update to version 2.4.9
+- Packaging cleanups.
+- Dropped patches from upstream: 
+  - freetype-CVE-2010-3855.patch
+  - freetype-CVE-2010-3814.patch
+- Dropped unused patch:
+  - freetype-2.3.0-enable-spr.patch
+
 * Tue Dec 21 2010 Ling Yue <ling.yue@intel.com> - 2.4.2
 - Add freetype-CVE-2010-3814.patch to fix BMC#10810
 

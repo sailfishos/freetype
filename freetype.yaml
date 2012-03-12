@@ -1,6 +1,6 @@
 Name: freetype
 Summary: A free and portable font rendering engine
-Version: 2.4.2
+Version: 2.4.9
 Release: 1
 Group: System/Libraries
 License: FTL or GPLv2+
@@ -9,16 +9,9 @@ Sources:
     - http://download.savannah.gnu.org/releases-noredirect/freetype/freetype-%{version}.tar.bz2
     - http://download.savannah.gnu.org/releases-noredirect/freetype/freetype-doc-%{version}.tar.bz2
 Patches:
-# Patented subpixel rendering disabled by default.
-# Pass '--with subpixel_rendering' on rpmbuild command-line to enable.
-#%{!?_with_subpixel_rendering: %{!?_without_subpixel_rendering: %define _without_subpixel_rendering --without-subpixel_rendering}}
-#%if %{?_with_subpixel_rendering:1}%{!?_with_subpixel_rendering:0}
-#    - freetype-2.3.0-enable-spr.patch
-#%endif
     - freetype-2.2.1-enable-valid.patch
     - freetype-multilib.patch
-    - freetype-CVE-2010-3855.patch
-    - freetype-CVE-2010-3814.patch
+
 Description: |
     The FreeType engine is a free and portable font rendering
     engine, developed to provide advanced font support for a variety of
@@ -29,10 +22,6 @@ Description: |
 
 Provides:
     - "%{name}-bytecode"
-#%if %{?_with_subpixel_rendering:1}%{!?_with_subpixel_rendering:0}
-#    - "%{name}-subpixel"
-#%endif
-#Can't use yaml configure and builder because of some scripts between configure and make
 Configure: none
 Builder: none
 SubPackages:
@@ -47,5 +36,3 @@ SubPackages:
           FreeType.
       Requires:
           - zlib-devel
-          - pkgconfig
-

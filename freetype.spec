@@ -85,7 +85,7 @@ rm -rf %{buildroot}
 %makeinstall gnulocaledir=$RPM_BUILD_ROOT%{_datadir}/locale
 
 # fix multilib issues
-%ifarch x86_64 s390x ia64 ppc64 alpha sparc64
+%ifarch x86_64 s390x ia64 ppc64 alpha sparc64 aarch64
 %define wordsize 64
 %else
 %define wordsize 32

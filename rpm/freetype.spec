@@ -1,12 +1,13 @@
 Name:       freetype
 Summary:    A free and portable font rendering engine
-Version:    2.6.3
+Version:    2.8.0
 Release:    1
 Group:      System/Libraries
 License:    FTL or GPLv2+
 URL:        http://www.freetype.org
 Source0:    http://download.savannah.gnu.org/releases-noredirect/freetype/freetype-%{version}.tar.bz2
-Patch0:     freetype-2.2.1-enable-valid.patch
+Patch0:     freetype-2.7.0-enable-valid.patch
+BuildRequires: libtool
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 Provides:   %{name}-bytecode
@@ -38,29 +39,22 @@ FreeType.
 
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version}/%{name}
 
-pushd freetype
 # freetype-2.2.1-enable-valid.patch
 %patch0 -p1
-popd
 
 %build
-pushd freetype
 sh autogen.sh
 %configure --disable-static
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' builds/unix/libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' builds/unix/libtool
 make %{?_smp_mflags}
 
-popd
-
 %install
 rm -rf %{buildroot}
 
-pushd freetype
 %makeinstall gnulocaledir=$RPM_BUILD_ROOT%{_datadir}/locale
-popd
 
 
 %post -p /sbin/ldconfig

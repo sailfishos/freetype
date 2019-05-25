@@ -66,7 +66,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %{_libdir}/libfreetype.so.*
 %exclude %{_libdir}/libfreetype.la
-%exclude %{_datadir}/man/man1/freetype-config.1.gz
 
 %files devel
 %defattr(-,root,root,-)
@@ -74,6 +73,5 @@ rm -rf %{buildroot}
 %{_datadir}/aclocal/freetype2.m4
 %{_includedir}/freetype2/*
 %{_libdir}/libfreetype.so
-%{_bindir}/freetype-config
 %{_libdir}/pkgconfig/*.pc
 

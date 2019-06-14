@@ -46,7 +46,7 @@ FreeType.
 
 %build
 sh autogen.sh
-%configure --disable-static
+%configure --disable-static --enable-freetype-config
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' builds/unix/libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' builds/unix/libtool
 make %{?_smp_mflags}
@@ -73,5 +73,6 @@ rm -rf %{buildroot}
 %{_datadir}/aclocal/freetype2.m4
 %{_includedir}/freetype2/*
 %{_libdir}/libfreetype.so
+%{_bindir}/freetype-config
 %{_libdir}/pkgconfig/*.pc
-
+%{_mandir}/man1/*

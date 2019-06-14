@@ -1,12 +1,12 @@
 Name:       freetype
 Summary:    A free and portable font rendering engine
-Version:    2.8.0
+Version:    2.10.0
 Release:    1
 Group:      System/Libraries
 License:    FTL or GPLv2+
 URL:        http://www.freetype.org
 Source0:    http://download.savannah.gnu.org/releases-noredirect/freetype/freetype-%{version}.tar.bz2
-Patch0:     freetype-2.7.0-enable-valid.patch
+Patch0:     0001-Enable-TrueType-GX-AAT-and-OpenType-table-validation.patch
 BuildRequires: libtool
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -41,7 +41,7 @@ FreeType.
 %prep
 %setup -q -n %{name}-%{version}/%{name}
 
-# freetype-2.2.1-enable-valid.patch
+# 0001-Enable-TrueType-GX-AAT-and-OpenType-table-validation.patch
 %patch0 -p1
 
 %build
@@ -66,7 +66,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %{_libdir}/libfreetype.so.*
 %exclude %{_libdir}/libfreetype.la
-%exclude %{_datadir}/man/man1/freetype-config.1.gz
 
 %files devel
 %defattr(-,root,root,-)
@@ -74,6 +73,5 @@ rm -rf %{buildroot}
 %{_datadir}/aclocal/freetype2.m4
 %{_includedir}/freetype2/*
 %{_libdir}/libfreetype.so
-%{_bindir}/freetype-config
 %{_libdir}/pkgconfig/*.pc
 

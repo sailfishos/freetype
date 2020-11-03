@@ -1,17 +1,19 @@
 Name:       freetype
 Summary:    A free and portable font rendering engine
-Version:    2.10.0
+Version:    2.10.4
 Release:    1
-Group:      System/Libraries
 License:    FTL or GPLv2+
-URL:        http://www.freetype.org
-Source0:    http://download.savannah.gnu.org/releases-noredirect/freetype/freetype-%{version}.tar.bz2
+URL:        https://www.freetype.org/
+Source0:    %{name}-%{version}.tar.bz2
 Patch0:     0001-Enable-TrueType-GX-AAT-and-OpenType-table-validation.patch
+BuildRequires: autoconf
 BuildRequires: libtool
+BuildRequires: pkgconfig(zlib)
+BuildRequires: bzip2-devel
+BuildRequires: pkgconfig(libpng)
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 Provides:   %{name}-bytecode
-
 
 %description
 The FreeType engine is a free and portable font rendering
@@ -22,12 +24,9 @@ individual glyphs. FreeType is not a font server or a complete
 text-rendering library.
 
 
-
 %package devel
 Summary:    FreeType development libraries and header files
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
-Requires:   zlib-devel
 
 %description devel
 The freetype-devel package includes the static libraries and header files
@@ -37,35 +36,31 @@ Install freetype-devel if you want to develop programs which will use
 FreeType.
 
 
-
 %prep
-%setup -q -n %{name}-%{version}/%{name}
-
-# 0001-Enable-TrueType-GX-AAT-and-OpenType-table-validation.patch
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
-sh autogen.sh
-%configure --disable-static --enable-freetype-config
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' builds/unix/libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' builds/unix/libtool
-make %{?_smp_mflags}
+./autogen.sh
+%configure --disable-static \
+  --with-zlib=yes \
+  --with-bzip2=yes \
+  --with-png=yes \
+  --enable-freetype-config \
+  --with-harfbuzz=no \
+  --with-brotli=no
+%make_build
 
 %install
-rm -rf %{buildroot}
-
-%makeinstall gnulocaledir=$RPM_BUILD_ROOT%{_datadir}/locale
-
+%make_install
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
-
 %files
 %defattr(-,root,root,-)
+%license docs/LICENSE.TXT docs/FTL.TXT docs/GPLv2.TXT
 %{_libdir}/libfreetype.so.*
-%exclude %{_libdir}/libfreetype.la
 
 %files devel
 %defattr(-,root,root,-)
@@ -74,5 +69,5 @@ rm -rf %{buildroot}
 %{_includedir}/freetype2/*
 %{_libdir}/libfreetype.so
 %{_bindir}/freetype-config
-%{_libdir}/pkgconfig/*.pc
+%{_libdir}/pkgconfig/freetype2.pc
 %{_mandir}/man1/*

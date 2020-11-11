@@ -1,4 +1,4 @@
-From bfc394c8621866f87a6a5f7c2e1d88d0d72b544c Mon Sep 17 00:00:00 2001
+From b8cafae81a4aa80b87f7d7cba808c4ba2955f5eb Mon Sep 17 00:00:00 2001
 From: Niels Breet <niels.breet@jolla.com>
 Date: Fri, 14 Jun 2019 12:42:06 +0300
 Subject: [PATCH] Enable TrueType GX/AAT and OpenType table validation
@@ -8,7 +8,7 @@ Subject: [PATCH] Enable TrueType GX/AAT and OpenType table validation
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/modules.cfg b/modules.cfg
-index dc6c8d4..2ab1450 100644
+index d6cdbe523..181f91541 100644
 --- a/modules.cfg
 +++ b/modules.cfg
 @@ -111,7 +111,7 @@ AUX_MODULES += cache
@@ -30,5 +30,5 @@ index dc6c8d4..2ab1450 100644
  # Auxiliary PostScript driver component to share common code.
  #
 -- 
-1.9.1
+2.29.2
 

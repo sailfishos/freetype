@@ -1,6 +1,6 @@
 Name:       freetype
 Summary:    A free and portable font rendering engine
-Version:    2.13.1
+Version:    2.14.2
 Release:    1
 License:    FTL or GPLv2+
 URL:        https://www.freetype.org/
@@ -58,12 +58,10 @@ FreeType.
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %license LICENSE.TXT docs/FTL.TXT docs/GPLv2.TXT
 %{_libdir}/libfreetype.so.*
 
 %files devel
-%defattr(-,root,root,-)
 %dir %{_includedir}/freetype2
 %{_datadir}/aclocal/freetype2.m4
 %{_includedir}/freetype2/*

@@ -1,4 +1,4 @@
-From b8cafae81a4aa80b87f7d7cba808c4ba2955f5eb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Niels Breet <niels.breet@jolla.com>
 Date: Fri, 14 Jun 2019 12:42:06 +0300
 Subject: [PATCH] Enable TrueType GX/AAT and OpenType table validation
@@ -8,10 +8,10 @@ Subject: [PATCH] Enable TrueType GX/AAT and OpenType table validation
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/modules.cfg b/modules.cfg
-index d6cdbe523..181f91541 100644
+index fa8592b15171db74ed0f10e92fd42b3b146c2732..cc97ec1af50aebda824d5d7e06d65e35c167d074 100644
 --- a/modules.cfg
 +++ b/modules.cfg
-@@ -111,7 +111,7 @@ AUX_MODULES += cache
+@@ -117,7 +117,7 @@ AUX_MODULES += cache
  
  # TrueType GX/AAT table validation.  Needs `ftgxval.c' below.
  #
@@ -20,7 +20,7 @@ index d6cdbe523..181f91541 100644
  
  # Support for streams compressed with gzip (files with suffix .gz).
  #
-@@ -130,7 +130,7 @@ AUX_MODULES += bzip2
+@@ -136,7 +136,7 @@ AUX_MODULES += bzip2
  
  # OpenType table validation.  Needs `ftotval.c' below.
  #
@@ -29,6 +29,3 @@ index d6cdbe523..181f91541 100644
  
  # Auxiliary PostScript driver component to share common code.
  #
--- 
-2.29.2
-
